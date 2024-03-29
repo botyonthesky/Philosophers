@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 07:34:35 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/03/29 09:53:26 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:44:47 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@ void    print_status(t_philo *philo, int status, int side, int debug)
     is_finish = philo->table->is_finish;
     
     time = get_time() - philo->table->starting_time;
-    if (philo->is_full == true)
+    if (check_bool(&philo->philo_mutex, &philo->is_full) == true)
         return ;
-    
     if (debug == 0)
     {
         pthread_mutex_lock(&philo->table->write_mutex);
         if (status == FORK && !is_finish)
             printf("%ld %d has taken a fork\n", time, philo->philo_id);
-        if (status == FORK && !is_finish)
-            printf("%ld %d has taken a fork\n", time, philo->philo_id);    
+        // if (status == FORK && !is_finish)
+        //     printf("%ld %d has taken a fork\n", time, philo->philo_id);    
         if (status == THINK && !is_finish)
             printf("%ld %d is thinking\n", time, philo->philo_id);
         if (status == EAT && !is_finish)
@@ -44,9 +43,9 @@ void    print_status(t_philo *philo, int status, int side, int debug)
     {
         pthread_mutex_lock(&philo->table->write_mutex);
         if (status == FORK && side == LEFT && !is_finish)
-            printf("%ld philo %d has taken the left fork n%d\n", time, philo->philo_id, philo->left_fork->fork_id);
+            printf("%ld philo %d has taken fork n%d\n", time, philo->philo_id, philo->left_fork->fork_id);
         if (status == FORK && side == RIGHT && !is_finish)
-            printf("%ld philo %d has taken the right fork n%d\n", time, philo->philo_id, philo->right_fork->fork_id);    
+            printf("%ld philo %d has taken fork n%d\n", time, philo->philo_id, philo->right_fork->fork_id);    
         if (status == EAT && !is_finish)
             printf("%ld philo %d is eating his %lu meal whith fork %d and %d\n", time, philo->philo_id,
             philo->count_meal, philo->left_fork->fork_id, philo->right_fork->fork_id);
@@ -54,27 +53,13 @@ void    print_status(t_philo *philo, int status, int side, int debug)
             printf("%ld philo %d is sleeping\n", time, philo->philo_id);
         if (status == THINK && !is_finish)
             printf("%ld philo %d is thinking\n", time, philo->philo_id);
-        if (status == DIED && !is_finish)
+        if (status == DIED)
             printf("%ld philo %d is died\n", time, philo->philo_id);
         pthread_mutex_unlock(&philo->table->write_mutex);
     }
 }
 
 
-
-void    wait_philo(size_t timing)
-{
-    //EST-ce que qqun est mort ? philo->table->someone_dead?
-    //SI OUI return exit val;
-    long    time;
-
-    time = get_time() + timing;
-
-    while (get_time() < time)
-    {
-        usleep(1000);
-    }
-}
 
 void    stop_simulation(t_table *table)
 {
@@ -86,56 +71,60 @@ void    *thread_routine(void *data)
     t_philo *philo;
 
     philo = (t_philo *)data;
-    synchronize_thread(philo->table);
+    // synchronize_thread(philo->table);
     assign_data(&philo->philo_mutex, &philo->last_meal, get_time());
     increase_data(&philo->table->meal_mutex, &philo->table->nb_thread);
-    if (philo->table->nb_philo % 2 == 0)
-        wait_philo(50);
+    synchro_philo(philo);
+    // if (philo->table->nb_philo % 2 == 0)
+    //     wait_philo(philo->table, 50);
     while (philo->table->is_finish == false)
     {
-
         if (check_bool(&philo->philo_mutex, &philo->is_full) == true)
             break ; 
         eat_routine(philo);
-        print_status(philo, SLEEP, -1, 0);
-        wait_philo(philo->table->time_to_sleep);
-        
-        print_status(philo, THINK, -1, 0);
-        wait_philo(philo->table->time_to_think);
+        sleep_routine(philo);
+        think_routine(philo);
     }
     return (NULL);
 }
+
+void    sleep_routine(t_philo *philo)
+{
+    print_status(philo, SLEEP, -1, 0);
+    wait_sleep(philo->table);
+}
+
+void    think_routine(t_philo *philo)
+{
+    print_status(philo, THINK, -1, 0);
+    wait_think(philo->table);
+}
+
 void    eat_routine(t_philo *philo)
 {
+    if (check_bool(&philo->table->meal_mutex, &philo->table->someone_died) == true)
+        return ;
+    if (check_bool(&philo->philo_mutex, &philo->is_full) == true)
+        return ;
     pthread_mutex_lock(&philo->left_fork->fork);
     print_status(philo, FORK, LEFT, 0);
     pthread_mutex_lock(&philo->right_fork->fork);
     print_status(philo, FORK, RIGHT, 0);
-    assign_data(&philo->philo_mutex, &philo->last_meal, get_time());
     increase_data(&philo->table->meal_mutex, &philo->count_meal);
     print_status(philo, EAT, -1, 0);
-    wait_philo(philo->table->time_to_eat);
+    assign_data(&philo->philo_mutex, &philo->last_meal, get_time());
+    wait_eat(philo->table);
     if (philo_full(philo) == true)
     {
         assign_bool(&philo->table->meal_mutex, &philo->is_full, true);    
         assign_bool(&philo->table->meal_mutex, &philo->table->is_finish, true);
+        return ;
     }
     pthread_mutex_unlock(&philo->right_fork->fork);
     pthread_mutex_unlock(&philo->left_fork->fork);
 }
 
-void    *thread_solo_routine(void *data)
-{
-    t_philo *philo;
-    
-    philo = (t_philo *)data;
-    pthread_mutex_lock(&philo->left_fork->fork);
-    print_status(philo, FORK, LEFT, 1);
-    wait_philo(philo->table->time_to_die);
-    print_status(philo, DIED, -1, 1);
-    pthread_mutex_unlock(&philo->left_fork->fork);
-    return (NULL);
-}
+
 
 
 

@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 07:34:05 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/03/29 09:39:28 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/03/29 11:05:48 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,21 @@ int    error_msg(char *str, char *str2)
 void    destroy_all(t_table *table)
 {
     int i;
+    t_philo *philo;
     
     i = 0;
+    
     while (i < table->nb_philo)
     {
-        pthread_mutex_destroy(&table->philo[i].philo_mutex);
+        philo = table->philo + i;
+        pthread_mutex_destroy(&philo->philo_mutex);
         pthread_mutex_destroy(&table->fork_mutex[i].fork);
         i++;
     }
     pthread_mutex_destroy(&table->meal_mutex);
-    // pthread_mutex_destroy(&table->monitor_mutex);
     pthread_mutex_destroy(&table->write_mutex);
+    free(table->fork_mutex);
+    free(table->philo);
 }
 
 // void	ft_free(t_philo *philo)

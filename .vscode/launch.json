@@ -6,11 +6,10 @@
 		"request": "launch",
 		"program": "${workspaceRoot}/philo",
 		"args": [
-			"6",
-			"800",
+			"1",
+			"310",
 			"200",
 			"100",
-			"2",
 		],
 		"stopAtEntry": false,
 		"cwd": "${workspaceRoot}",

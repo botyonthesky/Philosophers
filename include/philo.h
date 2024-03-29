@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 07:34:49 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/03/29 09:41:05 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:38:26 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ typedef		struct s_fork
 
 typedef	struct 			s_table
 {
-	unsigned long		time_to_die;
-	unsigned long		time_to_eat;
-	unsigned long		time_to_sleep;
-	unsigned long		time_to_think;
+	long		time_to_die;
+	long		time_to_eat;
+	long		time_to_sleep;
+	long		time_to_think;
 	long				nb_meal;
 	int					nb_philo;
 	int					nb_fork;
@@ -70,13 +70,11 @@ typedef	struct 			s_table
 	long				nb_thread;
 	pthread_mutex_t		meal_mutex;
 	pthread_mutex_t		write_mutex;
-	unsigned long		starting_time;
+	long		starting_time;
 	t_fork				*fork_mutex;
 	bool				is_finish;
 	t_philo				*philo;
 }					t_table;
-
-
 
 typedef struct				s_philo
 {
@@ -93,7 +91,7 @@ typedef struct				s_philo
 
 /*----------------------------------Base------------------------------------*/
 
-int     main(int argc, char **argv);
+int					main(int argc, char **argv);
 
 /*----------------------------------Init------------------------------------*/
 
@@ -101,53 +99,63 @@ int   				ft_init(t_table *table, char **av);
 int					init_argv(t_table *table, char **av);
 int					init_alloc(t_table *table);
 int					init_philo(t_table *table);
+void				manage_fork(t_philo *philo, t_fork *forks, int i);
 int				    init_fork(t_table *table);
 int					init_mutex(t_table *table);
 int 				init_write(t_table *table);
 int 				init_meal(t_table *table);
-// int					init_death(t_table *table);
-// pthread_t    		*init_thread(t_philo *philo);
 
 /*----------------------------------Philo-----------------------------------*/
 
 int    				philo(char **av);
-void				manage_fork(t_philo *philo, t_fork *forks, int i);
-void    			start_simulation(t_table *table);
-void			    *monitor(void *data);
-long			 	get_time(void);
-void    			*thread_routine(void *data);
-
+void				monitor(t_table *table);
+int					start_simulation(t_table *table);
+bool				*simulation_ended(t_table *table);
+bool				simulation_end_bc_die(t_table *table);
+void				stop_simulation(t_table *table);
+bool				philo_died(t_philo *philo);
+bool     			philo_full(t_philo *philo);
 
 /*----------------------------------Thread----------------------------------*/
 
 void    			*thread_routine(void *data);
 void				*thread_solo_routine(void *data);
 void				solo_routine(t_table *table);
-void				eat_routine(t_philo *philo);
-void				wait_philo(size_t timing);
-void				stop_simulation(t_table *table);
-void				print_status(t_philo *philo, int status, int side, int debug);
-// void				print_status_debug(t_philo *philo, int status, int side);
 void			    synchronize_thread(t_table *table);
 bool				is_all_thread(pthread_mutex_t *mutex, long *thread, long nb_philo);
+
+/*----------------------------------State----------------------------------*/
+
+void				eat_routine(t_philo *philo);
+void				sleep_routine(t_philo *philo);
+void				think_routine(t_philo *philo);
+void				print_status(t_philo *philo, int status, int side, int debug);
 
 /*----------------------------------Check-----------------------------------*/
 
 int 				check_argv(char **av);
 void    			increase_data(pthread_mutex_t *mutex, long *data);
 void    			assign_data(pthread_mutex_t *mutex,long *data, long value);
+void				reassign_data(pthread_mutex_t *mutex, long *data, long *value);
 long				check_data(pthread_mutex_t *mutex, long *value);
 void    			assign_bool(pthread_mutex_t *mutex, bool *check, bool value);
 bool    			check_bool(pthread_mutex_t *mutex, bool *value);
-bool				philo_died(t_philo *philo);
-bool     			philo_full(t_philo *philo);
 
+/*----------------------------------Time-----------------------------------*/
+
+long			 	get_time(void);
+void    			synchro_philo(t_philo *philo);
+void				wait_eat(t_table *table);
+void				wait_sleep(t_table *table);
+void				wait_think(t_table *table);
+void				wait_die(t_table *table);
 
 /*----------------------------------Error-----------------------------------*/
 
 int    				error_msg(char *str, char *str2);
 void    			destroy_all(t_table *table);
 void				ft_free(t_philo *philo);
+
 /*----------------------------------Utils-----------------------------------*/
 
 void	*ft_calloc(size_t nmemb, size_t size);
