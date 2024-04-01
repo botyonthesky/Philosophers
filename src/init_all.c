@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 11:28:10 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 13:43:03 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:36:09 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void    manage_fork(t_philo *philo, t_fork *forks, int i)
 
     philo->left_fork = &forks[(i + 1) % nb_philo];
     philo->right_fork = &forks[i];
-    if (nb_philo % 2 == 0)
+    if (philo->philo_id % 2 == 0)
     {
         philo->left_fork = &forks[i];
         philo->right_fork = &forks[(i + 1) % nb_philo];

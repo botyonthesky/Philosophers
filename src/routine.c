@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 08:57:05 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 13:52:59 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:18:36 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,6 @@ void    eat_routine(t_philo *philo)
 {
     long time;
 
-    // if (check_bool(&philo->table->table_mutex, &philo->table->someone_died) == true)
-    //     return;
-    // if (check_bool(&philo->table->table_mutex, &philo->table->is_finish) == true)
-    //     return;
     pthread_mutex_lock(&philo->left_fork->fork);
     print_status(philo, FORK);
     pthread_mutex_lock(&philo->right_fork->fork);
@@ -53,6 +49,29 @@ void    eat_routine(t_philo *philo)
     pthread_mutex_unlock(&philo->right_fork->fork);
     wait_sleep(philo->table, philo->table->time_to_sleep);
 }
+
+// void    eat_routine(t_philo *philo)
+// {
+//     long time;
+
+//     pthread_mutex_lock(&philo->table->fork_mutex[philo->philo_id].fork);
+//     print_status(philo, FORK);
+//     pthread_mutex_lock(&philo->table->fork_mutex[philo->philo_id].fork);
+//     print_status(philo, FORK);
+//     print_status(philo, EAT);
+//     time = get_time();
+//     assign_data(&philo->philo_mutex, &philo->last_meal_time, time);
+//     wait_eat(philo->table, philo->table->time_to_eat);
+//     if (simulation_ended2(philo->table) == false)
+//     {
+//         increase_data(&philo->philo_mutex, &philo->count_meal);
+//     }
+//     print_status(philo, SLEEP);
+//     pthread_mutex_unlock(&philo->table->fork_mutex[philo->philo_id].fork);
+//     pthread_mutex_unlock(&philo->table->fork_mutex[philo->philo_id].fork);
+
+//     wait_sleep(philo->table, philo->table->time_to_sleep);
+// }
 
 void    solo_routine(t_table *table)
 {
