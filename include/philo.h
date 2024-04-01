@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 07:34:49 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 13:40:49 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 15:02:44 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,13 +113,8 @@ int    				philo(char **av);
 void				*monitor(void *data);
 int					start_simulation(t_table *table);
 void				join_and_finish(t_table *table);
-bool				simulation_ended2(t_table *table);
-bool				*simulation_ended(t_table *table);
+bool				simulation_ended(t_table *table);
 bool				simulation_end_bc_die(t_table *table);
-void				stop_simulation(t_table *table);
-
-bool				philo_died(t_philo *philo);
-bool     			philo_full(t_philo *philo);
 bool				is_died(t_philo *philo);
 /*----------------------------------Thread----------------------------------*/
 
@@ -127,12 +122,10 @@ void    			*thread_routine(void *data);
 void				*thread_solo_routine(void *data);
 void				solo_routine(t_table *table);
 void			    synchronize_thread(t_table *table);
-bool				is_all_thread(pthread_mutex_t *mutex, long *thread, long nb_philo);
 
 /*----------------------------------State----------------------------------*/
 
-void				eat_routine(t_philo *philo);
-void				sleep_routine(t_philo *philo);
+void				eat_sleep_routine(t_philo *philo);
 void				think_routine(t_philo *philo);
 void				print_status(t_philo *philo, int status);
 
@@ -141,7 +134,6 @@ void				print_status(t_philo *philo, int status);
 int 				check_argv(char **av);
 void    			increase_data(pthread_mutex_t *mutex, long *data);
 void    			assign_data(pthread_mutex_t *mutex,long *data, long value);
-void				reassign_data(pthread_mutex_t *mutex, long *src, long *dest);
 long				check_data(pthread_mutex_t *mutex, long *value);
 void    			assign_bool(pthread_mutex_t *mutex, bool *check, bool value);
 bool    			check_bool(pthread_mutex_t *mutex, bool *value);
@@ -149,8 +141,7 @@ bool    			check_bool(pthread_mutex_t *mutex, bool *value);
 /*----------------------------------Time-----------------------------------*/
 
 long			 	get_time(void);
-void    			synchro_philo(t_philo *philo);
-void    			synchro_philo2(long time);
+void    			synchro_philo(long time);
 void				wait_eat(t_table *table, long timing);
 void				wait_sleep(t_table *table, long timing);
 void				wait_think(t_table *table);
@@ -162,6 +153,8 @@ int    				error_msg(char *str, char *str2);
 void    			destroy_all(t_table *table);
 void				ft_free(t_philo *philo);
 void				*free_table(t_table *table);
+void				clean_fork_mutex(t_table *table);
+
 
 /*----------------------------------Utils-----------------------------------*/
 

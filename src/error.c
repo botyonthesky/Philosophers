@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 07:34:05 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 13:42:46 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:55:43 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,16 @@ void    destroy_all(t_table *table)
     pthread_mutex_destroy(&table->death_mutex);
     free(table->fork_mutex);
     free(table->philo);
+}
+void    clean_fork_mutex(t_table *table)
+{
+    int i;
+
+    i = 0;
+    while (i < table->nb_philo)
+    {
+        pthread_mutex_destroy(&table->fork_mutex[i].fork);
+        i++;
+    }
+    free(table->fork_mutex);
 }

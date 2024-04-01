@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 12:14:26 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 13:37:53 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 15:01:26 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ long get_time(void)
     }
 }
 
-
 void    wait_eat(t_table *table, long timing)
 {
     long    time;
@@ -33,7 +32,7 @@ void    wait_eat(t_table *table, long timing)
     time = get_time() + timing;
     while (get_time() < time)
     {
-        if (simulation_ended2(table))
+        if (simulation_ended(table))
             break ;
         usleep(100);
     }
@@ -46,7 +45,7 @@ void    wait_sleep(t_table *table, long timing)
     time = get_time() + timing;    
     while (get_time() < time)
     {
-        if (simulation_ended2(table))
+        if (simulation_ended(table))
             break ;
         usleep(100);
     }
@@ -68,7 +67,6 @@ void    wait_think(t_table *table)
     wait_sleep(table, thinking_time);
 }
 
-
 void    wait_die(t_table *table, long timing)
 {
     long    time;
@@ -76,25 +74,9 @@ void    wait_die(t_table *table, long timing)
     time = get_time() + timing;
     while(get_time() < time)
     {
-        if (simulation_ended2(table))
+        if (simulation_ended(table))
             break ;
         usleep(100);
     }
 }
 
-bool        simulation_ended2(t_table *table)
-{
-    bool ret;
-    ret = false;
-    pthread_mutex_lock(&table->table_mutex);
-    if (table->is_finish == true)
-        ret = true;
-    pthread_mutex_unlock(&table->table_mutex);
-    return (ret);
-}
-
-void    synchro_philo2(long time)
-{
-    while (get_time() < time)
-        continue ;
-}

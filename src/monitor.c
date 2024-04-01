@@ -6,12 +6,11 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:55:08 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 14:41:37 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:59:11 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
-
 
 void    *monitor(void *data)
 {
@@ -20,7 +19,7 @@ void    *monitor(void *data)
     table = (t_table *)data;
     if (table->nb_meal == 0)
         return (NULL);
-    synchro_philo2(table->starting_time);
+    synchro_philo(table->starting_time);
     while (true)
     {
         if (simulation_end_bc_die(table) == true)
@@ -70,44 +69,6 @@ bool    is_died(t_philo *philo)
         printf("%ld philo %d is died\n", (time - philo->table->starting_time), philo->philo_id);
         pthread_mutex_unlock(&philo->philo_mutex);
         return (true);
-    }
-    return (false);
-}
-
-bool    philo_died(t_philo *philo)
-{
-    long    time;
-    long    remain;
-    long    check;
-
-    time = philo->table->time_to_die;
-    check = check_data(&philo->table->table_mutex, &philo->last_meal_time);
-    remain = get_time() - check;
-    if (remain > time)
-        return (true);
-    else
-        return (false);
-}
-
-bool     is_all_thread(pthread_mutex_t *mutex, long *thread, long nb_philo)
-{
-    bool ret;
-
-    ret = false;
-    pthread_mutex_lock(mutex);
-    if (*thread == nb_philo)
-        ret = true;
-    pthread_mutex_unlock(mutex);
-    return (ret);
-}
-
-
-bool     philo_full(t_philo *philo)
-{
-    if (philo->table->nb_meal != -1)
-    {
-        if(philo->count_meal >= philo->table->nb_meal)
-            return (true);
     }
     return (false);
 }

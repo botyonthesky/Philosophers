@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 09:54:45 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 12:51:35 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:55:02 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,7 @@ int ft_check_int(char **argv)
     }
     return (0);
 }
-void    increase_data(pthread_mutex_t *mutex, long *data)
-{
-    pthread_mutex_lock(mutex);
-    (*data) += 1;
-    pthread_mutex_unlock(mutex);
-}
-void    reassign_data(pthread_mutex_t *mutex, long *src, long *dst)
-{
-    pthread_mutex_lock(mutex);
-    *dst = *src;
-    pthread_mutex_unlock(mutex);
-}
 
-void    assign_data(pthread_mutex_t *mutex, long *data, long value)
-{
-    pthread_mutex_lock(mutex);
-    *data = value;
-    pthread_mutex_unlock(mutex);
-    
-}
 
 long      check_data(pthread_mutex_t *mutex, long *value)
 {
@@ -74,14 +55,8 @@ long      check_data(pthread_mutex_t *mutex, long *value)
     ret = *value;
     pthread_mutex_unlock(mutex);
     return (ret);
-    
 }
-void    assign_bool(pthread_mutex_t *mutex, bool *to_check, bool value)
-{
-    pthread_mutex_lock(mutex);
-    *to_check = value;
-    pthread_mutex_unlock(mutex);
-}
+
 
 bool    check_bool(pthread_mutex_t *mutex, bool *value)
 {

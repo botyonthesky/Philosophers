@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 07:33:53 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/03/25 12:21:37 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:46:20 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,9 @@ long	ft_atol(char *str)
 	return (result * sign);
 }
 
-
-int is_valid_digit(long nb)
+int	is_valid_digit(long nb)
 {
-    if (nb < 1 || nb > INT_MAX)
-        return (1);
-    return (0);
+	if (nb < 1 || nb > INT_MAX)
+		return (1);
+	return (0);
 }
