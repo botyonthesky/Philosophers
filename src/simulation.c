@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 08:56:37 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 15:01:28 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 15:38:49 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ void	join_and_finish(t_table *table)
 			i++;
 		}
 		pthread_join(table->monitor, NULL);
+    	// pthread_mutex_lock(&table->table_mutex);
 		assign_bool(&table->table_mutex, &table->is_finish, true);
+    	// pthread_mutex_unlock(&table->table_mutex);
 	}
 }
 
@@ -67,9 +69,13 @@ bool        simulation_ended(t_table *table)
     bool ret;
     ret = false;
     pthread_mutex_lock(&table->table_mutex);
+    // pthread_mutex_lock(&table->write_mutex);
+	
     if (table->is_finish == true)
         ret = true;
+    // pthread_mutex_unlock(&table->write_mutex);
     pthread_mutex_unlock(&table->table_mutex);
+
     return (ret);
 }
 

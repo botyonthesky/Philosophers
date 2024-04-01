@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 08:57:05 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 15:00:08 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 15:52:25 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void    eat_sleep_routine(t_philo *philo)
     print_status(philo, FORK);
     pthread_mutex_lock(&philo->right_fork->fork);
     print_status(philo, FORK);
-    print_status(philo, EAT);
-    time = get_time();
-    assign_data(&philo->philo_mutex, &philo->last_meal_time, time);
-    wait_eat(philo->table, philo->table->time_to_eat);
     if (simulation_ended(philo->table) == false)
     {
         increase_data(&philo->philo_mutex, &philo->count_meal);
     }
+    print_status(philo, EAT);
+    time = get_time();
+    assign_data(&philo->philo_mutex, &philo->last_meal_time, time);
+    wait_eat(philo->table, philo->table->time_to_eat);
     print_status(philo, SLEEP);
     pthread_mutex_unlock(&philo->left_fork->fork);
     pthread_mutex_unlock(&philo->right_fork->fork);

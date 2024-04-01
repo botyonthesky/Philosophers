@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 14:54:22 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 14:54:55 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 15:49:46 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void    increase_data(pthread_mutex_t *mutex, long *data)
 {
     pthread_mutex_lock(mutex);
-    (*data) += 1;
+    (*data)++;
     pthread_mutex_unlock(mutex);
 }
 

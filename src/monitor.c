@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:55:08 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 14:59:11 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 15:46:07 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ bool    is_died(t_philo *philo)
     {
         assign_bool(&philo->table->table_mutex, &philo->table->someone_died, true);
         assign_bool(&philo->table->table_mutex, &philo->table->is_finish, true);
-        printf("%ld philo %d is died\n", (time - philo->table->starting_time), philo->philo_id);
+        pthread_mutex_lock(&philo->table->write_mutex);
+        printf("%ld %d is died\n", (time - philo->table->starting_time), philo->philo_id);
+        pthread_mutex_unlock(&philo->table->write_mutex);
+
         pthread_mutex_unlock(&philo->philo_mutex);
         return (true);
     }

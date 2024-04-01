@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 12:14:26 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 15:01:26 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 15:55:15 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void    wait_sleep(t_table *table, long timing)
 {
     long    time;
     
-    time = get_time() + timing;    
+    time = get_time() + timing;
     while (get_time() < time)
     {
         if (simulation_ended(table))

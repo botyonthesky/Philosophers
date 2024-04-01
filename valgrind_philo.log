@@ -1,0 +1,384 @@
+==441071== Memcheck, a memory error detector
+==441071== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==441071== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==441071== Command: ./philo 199 610 200 200 10
+==441071== 
+1 28 is thinking
+7 28 has taken a fork
+8 28 has taken a fork
+8 28 is eating
+9 2 is thinking
+9 2 has taken a fork
+9 2 has taken a fork
+9 2 is eating
+9 16 is thinking
+9 16 has taken a fork
+9 16 has taken a fork
+9 16 is eating
+9 9 has taken a fork
+9 9 has taken a fork
+9 9 is eating
+9 17 has taken a fork
+10 18 is thinking
+10 19 has taken a fork
+10 19 has taken a fork
+10 19 is eating
+10 10 is thinking
+10 20 is thinking
+10 3 has taken a fork
+10 6 is thinking
+10 6 has taken a fork
+10 6 has taken a fork
+10 6 is eating
+10 21 has taken a fork
+10 21 has taken a fork
+10 21 is eating
+10 11 has taken a fork
+10 11 has taken a fork
+10 11 is eating
+10 23 has taken a fork
+10 23 has taken a fork
+10 23 is eating
+10 12 is thinking
+10 25 has taken a fork
+10 25 has taken a fork
+10 25 is eating
+10 24 is thinking
+11 26 is thinking
+11 13 has taken a fork
+11 13 has taken a fork
+11 13 is eating
+2728 105 has taken a fork
+2728 105 has taken a fork
+2728 105 is eating
+2728 57 has taken a fork
+2728 57 has taken a fork
+2728 57 is eating
+2728 106 is thinking
+2728 107 has taken a fork
+2728 107 has taken a fork
+2728 107 is eating
+2729 33 has taken a fork
+2729 33 has taken a fork
+2729 33 is eating
+2729 108 is thinking
+2729 59 has taken a fork
+2729 59 has taken a fork
+2729 59 is eating
+2729 110 is thinking
+2729 110 has taken a fork
+2729 110 has taken a fork
+2729 110 is eating
+2729 34 is thinking
+2729 111 has taken a fork
+2729 112 is thinking
+2729 28 is sleeping
+2729 61 has taken a fork
+2729 61 has taken a fork
+2729 61 is eating
+2730 114 is thinking
+2730 114 has taken a fork
+2730 114 has taken a fork
+2730 114 is eating
+2730 62 is thinking
+2730 115 has taken a fork
+2730 35 has taken a fork
+2730 35 has taken a fork
+2730 35 is eating
+2730 116 is thinking
+2730 117 has taken a fork
+2730 117 has taken a fork
+2730 117 is eating
+2730 63 has taken a fork
+2730 63 has taken a fork
+2730 63 is eating
+2730 118 is thinking
+2730 119 has taken a fork
+2730 119 has taken a fork
+2730 119 is eating
+2730 120 is thinking
+2730 121 has taken a fork
+2730 121 has taken a fork
+2730 121 is eating
+2730 65 has taken a fork
+2730 65 has taken a fork
+2730 65 is eating
+2730 122 is thinking
+2730 37 has taken a fork
+2730 37 has taken a fork
+2730 37 is eating
+2730 123 has taken a fork
+2730 123 has taken a fork
+2730 123 is eating
+2730 19 is sleeping
+2730 124 is thinking
+2731 67 has taken a fork
+2731 67 has taken a fork
+2731 67 is eating
+2731 125 has taken a fork
+2731 125 has taken a fork
+2731 125 is eating
+2731 38 is thinking
+2731 126 is thinking
+2731 6 is sleeping
+2731 5 has taken a fork
+2731 5 has taken a fork
+2731 5 is eating
+2731 68 is thinking
+2731 39 has taken a fork
+2731 39 has taken a fork
+2731 39 is eating
+2731 129 has taken a fork
+2731 129 has taken a fork
+2731 129 is eating
+2731 69 has taken a fork
+2731 69 has taken a fork
+2731 69 is eating
+2731 131 has taken a fork
+2731 131 has taken a fork
+2731 131 is eating
+2731 132 is thinking
+2731 70 is thinking
+2732 71 has taken a fork
+2732 71 has taken a fork
+2732 71 is eating
+2732 133 has taken a fork
+2732 133 has taken a fork
+2732 133 is eating
+2732 134 is thinking
+2732 72 is thinking
+2732 135 has taken a fork
+2732 135 has taken a fork
+2732 135 is eating
+2732 136 is thinking
+2732 40 is thinking
+2732 137 has taken a fork
+2732 137 has taken a fork
+2732 137 is eating
+2732 73 has taken a fork
+2732 73 has taken a fork
+2732 73 is eating
+2732 41 has taken a fork
+2732 41 has taken a fork
+2732 41 is eating
+2732 138 is thinking
+2732 74 is thinking
+2732 139 has taken a fork
+2732 139 has taken a fork
+2732 139 is eating
+2732 140 is thinking
+2732 141 has taken a fork
+2732 141 has taken a fork
+2732 141 is eating
+2732 42 is thinking
+2732 142 is thinking
+2732 75 has taken a fork
+2732 75 has taken a fork
+2732 75 is eating
+2732 76 is thinking
+2732 143 has taken a fork
+2732 143 has taken a fork
+2732 143 is eating
+2732 144 is thinking
+2732 4 is thinking
+2732 145 has taken a fork
+2732 145 has taken a fork
+2732 145 is eating
+2732 77 has taken a fork
+2732 77 has taken a fork
+2732 77 is eating
+2732 146 is thinking
+2732 43 has taken a fork
+2732 43 has taken a fork
+2732 43 is eating
+2732 78 is thinking
+2732 147 has taken a fork
+2732 147 has taken a fork
+2732 147 is eating
+2732 21 is sleeping
+2732 148 is thinking
+2732 27 has taken a fork
+2732 27 has taken a fork
+2732 27 is eating
+2732 150 is thinking
+2732 150 has taken a fork
+2732 150 has taken a fork
+2732 150 is eating
+2732 79 has taken a fork
+2732 79 has taken a fork
+2732 79 is eating
+2732 44 is thinking
+2732 151 has taken a fork
+2732 152 is thinking
+2732 80 is thinking
+2732 7 has taken a fork
+2732 7 has taken a fork
+2732 7 is eating
+2732 153 has taken a fork
+2733 153 has taken a fork
+2733 153 is eating
+2733 154 is thinking
+2733 81 has taken a fork
+2733 81 has taken a fork
+2733 81 is eating
+2733 155 has taken a fork
+2733 155 has taken a fork
+2733 155 is eating
+2733 82 is thinking
+2733 156 is thinking
+2733 45 has taken a fork
+2733 45 has taken a fork
+2733 45 is eating
+2733 157 has taken a fork
+2733 157 has taken a fork
+2733 157 is eating
+2733 46 is thinking
+2733 158 is thinking
+2733 83 has taken a fork
+2733 83 has taken a fork
+2733 83 is eating
+2733 159 has taken a fork
+2733 159 has taken a fork
+2733 159 is eating
+2733 23 is sleeping
+2733 24 has taken a fork
+2733 161 has taken a fork
+2733 161 has taken a fork
+2733 161 is eating
+2733 162 is thinking
+2733 85 has taken a fork
+2733 85 has taken a fork
+2733 85 is eating
+2733 163 has taken a fork
+2733 163 has taken a fork
+2733 163 is eating
+2733 86 is thinking
+2733 25 is sleeping
+2733 26 has taken a fork
+2733 48 is thinking
+2733 48 has taken a fork
+2733 48 has taken a fork
+2733 48 is eating
+2733 166 is thinking
+2733 166 has taken a fork
+2733 166 has taken a fork
+2733 166 is eating
+2733 167 has taken a fork
+2733 13 is sleeping
+2733 168 is thinking
+2733 49 has taken a fork
+2733 169 has taken a fork
+2733 169 has taken a fork
+2733 169 is eating
+2733 170 is thinking
+2733 89 has taken a fork
+2733 89 has taken a fork
+2733 89 is eating
+2733 171 has taken a fork
+2733 171 has taken a fork
+2733 171 is eating
+2733 14 is thinking
+2733 14 has taken a fork
+2733 14 has taken a fork
+2733 14 is eating
+2733 172 is thinking
+2733 90 is thinking
+2733 50 is thinking
+2733 173 has taken a fork
+2733 173 has taken a fork
+2733 173 is eating
+2733 91 has taken a fork
+2733 91 has taken a fork
+2733 91 is eating
+2733 174 is thinking
+2733 29 has taken a fork
+2733 29 has taken a fork
+2733 29 is eating
+2733 175 has taken a fork
+2733 175 has taken a fork
+2733 175 is eating
+2733 176 is thinking
+2733 92 is thinking
+2733 177 has taken a fork
+2733 177 has taken a fork
+2733 177 is eating
+2733 30 is thinking
+2733 178 is thinking
+2733 94 is thinking
+2733 94 has taken a fork
+2733 94 has taken a fork
+2733 94 is eating
+2734 179 has taken a fork
+2734 179 has taken a fork
+2734 179 is eating
+2734 180 is thinking
+2734 51 has taken a fork
+2734 51 has taken a fork
+2734 51 is eating
+2734 181 has taken a fork
+2734 181 has taken a fork
+2734 181 is eating
+2734 182 is thinking
+2734 95 has taken a fork
+2734 52 is thinking
+2734 183 has taken a fork
+2734 183 has taken a fork
+2734 183 is eating
+2734 184 is thinking
+2734 96 is thinking
+2734 185 has taken a fork
+2734 185 has taken a fork
+2734 185 is eating
+2734 8 is thinking
+2734 97 has taken a fork
+2734 97 has taken a fork
+2734 97 is eating
+2734 186 is thinking
+2734 187 has taken a fork
+2734 187 has taken a fork
+2734 187 is eating
+2734 53 has taken a fork
+2734 53 has taken a fork
+2734 53 is eating
+2734 98 is thinking
+2734 188 is thinking
+2734 189 has taken a fork
+2734 189 has taken a fork
+2734 189 is eating
+2734 31 has taken a fork
+2734 31 has taken a fork
+2734 31 is eating
+2734 190 is thinking
+2734 99 has taken a fork
+2734 99 has taken a fork
+2734 99 is eating
+2734 54 is thinking
+2734 191 has taken a fork
+2734 191 has taken a fork
+2734 191 is eating
+2734 100 is thinking
+2734 192 is thinking
+2734 101 has taken a fork
+2734 101 has taken a fork
+2734 101 is eating
+2734 193 has taken a fork
+2734 193 has taken a fork
+2734 193 is eating
+2734 55 has taken a fork
+2734 55 has taken a fork
+2734 55 is eating
+2734 194 is thinking
+2734 102 is thinking
+2734 195 has taken a fork
+2734 195 has taken a fork
+2734 195 is eating
+2735 1 is died
+==441071== 
+==441071== HEAP SUMMARY:
+==441071==     in use at exit: 0 bytes in 0 blocks
+==441071==   total heap usage: 203 allocs, 203 frees, 92,840 bytes allocated
+==441071== 
+==441071== All heap blocks were freed -- no leaks are possible
+==441071== 
+==441071== For lists of detected and suppressed errors, rerun with: -s
+==441071== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
