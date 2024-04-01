@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 07:34:49 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 15:02:44 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 17:14:54 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ long			 	get_time(void);
 void    			synchro_philo(long time);
 void				wait_eat(t_table *table, long timing);
 void				wait_sleep(t_table *table, long timing);
-void				wait_think(t_table *table);
+void				wait_think(t_table *table, t_philo *philo);
 void				wait_die(t_table *table, long timing);
 
 /*----------------------------------Error-----------------------------------*/
@@ -163,5 +163,12 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 long	ft_atol(char *str);
 int 	is_valid_digit(long nb);
+
+
+
+
+
+
+void    lol(t_philo *philo, char *status, int i);
 
 #endif

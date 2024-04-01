@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 07:34:35 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 15:00:06 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 17:18:04 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,14 @@ void    *thread_routine(void *data)
         return (NULL);
     assign_data(&philo->philo_mutex, &philo->last_meal_time, philo->table->starting_time);
     synchro_philo(philo->table->starting_time);
+    print_status(philo, THINK);
     if (philo->table->time_to_die == 0)
         return (NULL);
-    if (philo->philo_id % 2 == 0)
-        think_routine(philo);
+    if (philo->philo_id % 2 == 0 && philo->philo_id != philo->table->nb_philo - 1)
+    {
+        usleep(10000);
+    }
+        // think_routine(philo);
     while (simulation_ended(philo->table) == false)
     {
         eat_sleep_routine(philo);

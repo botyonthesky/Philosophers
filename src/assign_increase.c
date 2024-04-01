@@ -6,29 +6,29 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 14:54:22 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 15:49:46 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 16:04:03 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void    increase_data(pthread_mutex_t *mutex, long *data)
+void	increase_data(pthread_mutex_t *mutex, long *data)
 {
-    pthread_mutex_lock(mutex);
-    (*data)++;
-    pthread_mutex_unlock(mutex);
+	pthread_mutex_lock(mutex);
+	(*data)++;
+	pthread_mutex_unlock(mutex);
 }
 
-void    assign_data(pthread_mutex_t *mutex, long *data, long value)
+void	assign_data(pthread_mutex_t *mutex, long *data, long value)
 {
-    pthread_mutex_lock(mutex);
-    *data = value;
-    pthread_mutex_unlock(mutex);   
+	pthread_mutex_lock(mutex);
+	*data = value;
+	pthread_mutex_unlock(mutex);
 }
 
-void    assign_bool(pthread_mutex_t *mutex, bool *to_check, bool value)
+void	assign_bool(pthread_mutex_t *mutex, bool *to_check, bool value)
 {
-    pthread_mutex_lock(mutex);
-    *to_check = value;
-    pthread_mutex_unlock(mutex);
+	pthread_mutex_lock(mutex);
+	*to_check = value;
+	pthread_mutex_unlock(mutex);
 }
