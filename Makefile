@@ -6,7 +6,7 @@
 #    By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 07:36:16 by tmaillar          #+#    #+#              #
-#    Updated: 2024/03/26 15:55:51 by tmaillar         ###   ########.fr        #
+#    Updated: 2024/04/01 08:59:07 by tmaillar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,10 @@ ROOT_SRC	:= \
 	time.c \
 	init_mutex.c \
 	init_all.c \
-	monitor.c
+	monitor.c \
+	routine.c \
+	simulation.c \
+	write.c
 ROOT_DIR	:= $(SRC_DIR)
 ROOT_OBJ	:= $(addprefix $(OBJ_DIR)/, $(ROOT_SRC:.c=.o))
 

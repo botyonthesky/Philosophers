@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 11:28:10 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/03/29 09:20:07 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 13:43:03 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ int     init_alloc(t_table *table)
     return (EXIT_SUCCESS);
 }
 
-
-
 int    init_philo(t_table *table)
 {
     int i;
@@ -74,7 +72,7 @@ int    init_philo(t_table *table)
         philo->philo_id = i + 1;
         philo->count_meal = 0;
         philo->is_full = false;
-         if (pthread_mutex_init(&philo->philo_mutex, NULL) != 0)
+        if (pthread_mutex_init(&philo->philo_mutex, NULL) != 0)
         {
             destroy_all(table);
             error_msg(INIT_ERR, NULL);
@@ -97,47 +95,7 @@ void    manage_fork(t_philo *philo, t_fork *forks, int i)
     philo->right_fork = &forks[i];
     if (nb_philo % 2 == 0)
     {
-        philo->right_fork = &forks[i];
-        philo->left_fork = &forks[(i + 1) % nb_philo];
+        philo->left_fork = &forks[i];
+        philo->right_fork = &forks[(i + 1) % nb_philo];
     }
 }
-
-// t_philo    *init_philo(t_table *table)
-// {
-//     int i;
-
-//     i = 0;
-//     t_philo *philo;
-//     philo = ft_calloc(table->nb_philo, (sizeof(t_philo)));
-//     if (philo == NULL)
-//         return (NULL);
-//     while (i < table->nb_philo)
-//     {
-//         if (pthread_mutex_init(&philo[i].philo_mutex, NULL) != 0)
-//         {
-//             destroy_all(table);
-//             error_msg(INIT_ERR, NULL);
-//             return (NULL);
-//         }
-//         philo[i].table = table;
-//         philo[i].philo_id = i + 1;
-//         philo[i].count_meal = 0;
-//         philo[i].is_full = false;
-//         manage_fork(table, &philo[i]);
-//         i++;
-//     }
-//     return (philo);
-// }
-// pthread_t    *init_thread(t_philo *philo)
-// {
-//     pthread_t *thread;
-    
-//     thread = ft_calloc(philo->table->nb_philo, (sizeof(pthread_t)));
-//     if (thread == NULL)
-//     {
-//         destroy_all(philo->table);
-//         return (NULL);
-//     }
-//     // (void)philo;
-//     return (thread);
-// }

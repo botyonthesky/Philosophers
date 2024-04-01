@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 09:54:45 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/03/29 14:53:58 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 12:51:35 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ int ft_check_int(char **argv)
 void    increase_data(pthread_mutex_t *mutex, long *data)
 {
     pthread_mutex_lock(mutex);
-    (*data)++;
+    (*data) += 1;
     pthread_mutex_unlock(mutex);
 }
-void    reassign_data(pthread_mutex_t *mutex, long *data, long *value)
+void    reassign_data(pthread_mutex_t *mutex, long *src, long *dst)
 {
     pthread_mutex_lock(mutex);
-    *value = *data;
+    *dst = *src;
     pthread_mutex_unlock(mutex);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 12:14:26 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/03/29 14:55:20 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/01 13:37:53 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,64 +26,75 @@ long get_time(void)
 }
 
 
-void    wait_eat(t_table *table)
+void    wait_eat(t_table *table, long timing)
 {
     long    time;
-    long    eating_time;
-    
-    reassign_data(&table->meal_mutex, &table->time_to_eat, &eating_time);
-    time = get_time() + eating_time;
-
+   
+    time = get_time() + timing;
     while (get_time() < time)
+    {
+        if (simulation_ended2(table))
+            break ;
         usleep(100);
+    }
 }
 
-void    wait_sleep(t_table *table)
+void    wait_sleep(t_table *table, long timing)
 {
     long    time;
-    long    sleeping_time;
-
-    time = get_time();    
-    reassign_data(&table->meal_mutex, &table->time_to_sleep, &sleeping_time);
-    while (get_time() - time < sleeping_time)
-        usleep(100);   
+    
+    time = get_time() + timing;    
+    while (get_time() < time)
+    {
+        if (simulation_ended2(table))
+            break ;
+        usleep(100);
+    }
 }
 
 void    wait_think(t_table *table)
 {
-    long time;
     long thinking_time;
 
-    time = get_time();
-    reassign_data(&table->meal_mutex, &table->time_to_think, &thinking_time);
+    pthread_mutex_lock(&table->philo->philo_mutex);
+    thinking_time = (table->time_to_die
+                - (get_time() - table->philo->last_meal_time)
+                - table->time_to_eat) / 2;
+    pthread_mutex_unlock(&table->philo->philo_mutex);
     if (thinking_time < 0)
         thinking_time = 0;
-    while (get_time() - time < thinking_time)
-        usleep(100);
+    if (thinking_time > 600)
+        thinking_time = 200;
+    wait_sleep(table, thinking_time);
 }
 
 
-void    wait_die(t_table *table)
+void    wait_die(t_table *table, long timing)
 {
     long    time;
-    long    dying_time;
     
-    reassign_data(&table->meal_mutex, &table->time_to_die, &dying_time);
-    time = get_time() + dying_time;
+    time = get_time() + timing;
     while(get_time() < time)
+    {
+        if (simulation_ended2(table))
+            break ;
         usleep(100);
+    }
 }
 
-void    synchro_philo(t_philo *philo)
+bool        simulation_ended2(t_table *table)
 {
-    if (philo->table->nb_philo % 2 == 0)
-    {
-        if (philo->philo_id % 2 == 0)
-            usleep(3000);
-    }
-    else
-    {
-        if (philo->philo_id)
-            think_routine(philo);
-    }
+    bool ret;
+    ret = false;
+    pthread_mutex_lock(&table->table_mutex);
+    if (table->is_finish == true)
+        ret = true;
+    pthread_mutex_unlock(&table->table_mutex);
+    return (ret);
+}
+
+void    synchro_philo2(long time)
+{
+    while (get_time() < time)
+        continue ;
 }

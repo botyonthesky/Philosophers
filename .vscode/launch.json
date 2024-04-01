@@ -6,7 +6,7 @@
 		"request": "launch",
 		"program": "${workspaceRoot}/philo",
 		"args": [
-			"1",
+			"2",
 			"310",
 			"200",
 			"100",
