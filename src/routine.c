@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 08:57:05 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 16:52:36 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/02 08:56:50 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ void	eat_sleep_routine(t_philo *philo)
 	pthread_mutex_lock(&philo->right_fork->fork);
 	print_status(philo, FORK);
 	if (simulation_ended(philo->table) == false)
-	{
 		increase_data(&philo->philo_mutex, &philo->count_meal);
-	}
 	print_status(philo, EAT);
 	time = get_time();
 	assign_data(&philo->philo_mutex, &philo->last_meal_time, time);
@@ -45,21 +43,35 @@ void	think_routine(t_philo *philo)
 	wait_think(philo->table, philo);
 }
 
-void	solo_routine(t_table *table)
+// int	solo_routine(t_table *table)
+// {
+// 	long	time;
+
+// 	time = get_time() + (table->nb_philo * 2 * 10);
+// 	assign_data(&table->table_mutex, &table->starting_time, time);
+// 	synchro_philo(table->starting_time);
+// 	if (pthread_create(&table->philo[0].thread, NULL,
+// 			thread_solo_routine, &table->philo[0]) != 0)
+// 	{
+// 		destroy_all(table);
+// 		error_msg(CREATE_ERR, NULL);
+// 		return (EXIT_FAILURE);
+// 	}
+// 	pthread_join(table->philo[0].thread, NULL);
+// 	assign_bool(&table->table_mutex, &table->is_finish, true);
+// 	return (EXIT_SUCCESS);
+// }
+
+int	solo_routine(t_table *table)
 {
 	long	time;
 
 	time = get_time() + (table->nb_philo * 2 * 10);
 	assign_data(&table->table_mutex, &table->starting_time, time);
 	synchro_philo(table->starting_time);
-	if (pthread_create(&table->philo[0].thread, NULL,
-			thread_solo_routine, &table->philo[0]) != 0)
-	{
-		destroy_all(table);
-		error_msg(CREATE_ERR, NULL);
-		return ;
-	}
+	if (secure_create(&table->philo[0].thread, thread_solo_routine, &table->philo[0]) == 1)
+		return (EXIT_FAILURE);
 	pthread_join(table->philo[0].thread, NULL);
 	assign_bool(&table->table_mutex, &table->is_finish, true);
-	return ;
+	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 07:34:49 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 17:14:54 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/02 08:49:27 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,12 @@ int 				init_write(t_table *table);
 int 				init_table(t_table *table);
 int 				init_death(t_table *table);
 
+/*----------------------------------Secure------------------------------------*/
+
+int     secure_create(pthread_t *thread, void *data, void *arg);
+int     secure_join(pthread_t thread);
+int     secure_init(pthread_mutex_t *mutex);
+
 /*----------------------------------Philo-----------------------------------*/
 
 int    				philo(char **av);
@@ -116,11 +122,12 @@ void				join_and_finish(t_table *table);
 bool				simulation_ended(t_table *table);
 bool				simulation_end_bc_die(t_table *table);
 bool				is_died(t_philo *philo);
+
 /*----------------------------------Thread----------------------------------*/
 
 void    			*thread_routine(void *data);
 void				*thread_solo_routine(void *data);
-void				solo_routine(t_table *table);
+int					solo_routine(t_table *table);
 void			    synchronize_thread(t_table *table);
 
 /*----------------------------------State----------------------------------*/

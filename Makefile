@@ -6,7 +6,7 @@
 #    By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 07:36:16 by tmaillar          #+#    #+#              #
-#    Updated: 2024/04/01 15:02:59 by tmaillar         ###   ########.fr        #
+#    Updated: 2024/04/02 09:02:50 by tmaillar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ ROOT_SRC	:= \
 	routine.c \
 	simulation.c \
 	write.c \
-	assign_increase.c 
+	assign_increase.c \
+	secure_thread.c 
 ROOT_DIR	:= $(SRC_DIR)
 ROOT_OBJ	:= $(addprefix $(OBJ_DIR)/, $(ROOT_SRC:.c=.o))
 

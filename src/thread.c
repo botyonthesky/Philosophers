@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 07:34:35 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 17:18:04 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/02 08:59:46 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ void    *thread_routine(void *data)
     print_status(philo, THINK);
     if (philo->table->time_to_die == 0)
         return (NULL);
-    if (philo->philo_id % 2 == 0 && philo->philo_id != philo->table->nb_philo - 1)
-    {
+    if (philo->philo_id % 2 == 0)
         usleep(10000);
-    }
-        // think_routine(philo);
     while (simulation_ended(philo->table) == false)
     {
         eat_sleep_routine(philo);

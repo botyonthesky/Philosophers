@@ -6,12 +6,11 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 07:34:24 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/03/29 11:02:03 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/02 09:17:56 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
-
 
 int     main(int argc, char **argv)
 {

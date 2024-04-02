@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 07:34:17 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 14:55:47 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/02 09:02:16 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,34 +57,53 @@ int    init_fork(t_table *table)
     return (EXIT_SUCCESS);
 }
 
+// int init_write(t_table *table)
+// {    
+//     if (pthread_mutex_init(&table->write_mutex, NULL) != 0)
+//     {
+//         pthread_mutex_destroy(&table->death_mutex);
+//         error_msg(INIT_ERR, NULL);
+//         return (EXIT_FAILURE);
+//     }
+//     return (EXIT_SUCCESS);
+// }
+
 int init_write(t_table *table)
 {    
-    if (pthread_mutex_init(&table->write_mutex, NULL) != 0)
-    {
-        pthread_mutex_destroy(&table->death_mutex);
-        error_msg(INIT_ERR, NULL);
+    if (secure_init(&table->write_mutex) == 1)
         return (EXIT_FAILURE);
-    }
     return (EXIT_SUCCESS);
 }
+
+// int init_table(t_table *table)
+// {    
+//     if (pthread_mutex_init(&table->table_mutex, NULL) != 0)
+//     {
+//         error_msg(INIT_ERR, NULL);
+//         return (EXIT_FAILURE);
+//     }
+//     return (EXIT_SUCCESS);
+// }
 
 int init_table(t_table *table)
-{    
-    if (pthread_mutex_init(&table->table_mutex, NULL) != 0)
-    {
-        error_msg(INIT_ERR, NULL);
+{
+    if (secure_init(&table->table_mutex) == 1)
         return (EXIT_FAILURE);
-    }
     return (EXIT_SUCCESS);
 }
+// int init_death(t_table *table)
+// {        
+//     if (pthread_mutex_init(&table->death_mutex, NULL) != 0)
+//     {
+//         error_msg(INIT_ERR, NULL);
+//         return (EXIT_FAILURE);
+//     }
+//     return (EXIT_SUCCESS);
+// }
+
 int init_death(t_table *table)
 {        
-    if (pthread_mutex_init(&table->death_mutex, NULL) != 0)
-    {
-        error_msg(INIT_ERR, NULL);
-        return (EXIT_FAILURE);
-    }
+    if (secure_init(&table->death_mutex) == 1)
+        return(EXIT_FAILURE);
     return (EXIT_SUCCESS);
 }
-
-

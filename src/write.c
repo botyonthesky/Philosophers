@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 08:55:55 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 17:17:35 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/02 09:01:58 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	print_status(t_philo *philo, int status)
 	if (status == THINK && !is_finish)
 		printf("%ld %d is thinking\n", time, philo->philo_id);
 	if (status == EAT && !is_finish)
-        // printf("%ld %d is eating is %ld meal\n", time, philo->philo_id, philo->count_meal);
 		printf("%ld %d is eating\n", time, philo->philo_id);
 	if (status == SLEEP && !is_finish)
 		printf("%ld %d is sleeping\n", time, philo->philo_id);

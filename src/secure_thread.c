@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   secure_thread.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 07:34:30 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/02 09:18:47 by tmaillar         ###   ########.fr       */
+/*   Created: 2024/04/02 08:38:54 by tmaillar          #+#    #+#             */
+/*   Updated: 2024/04/02 09:20:24 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int    philo(char **av)
+int     secure_create(pthread_t *thread, void *data, void *arg)
 {
-    t_table table;
-
-    if (ft_init(&table, av) == 1)
+    if (pthread_create(thread, NULL, data, arg) != 0)
     {
-        destroy_all(&table);
+        error_msg(CREATE_ERR, NULL);
         return (EXIT_FAILURE);
     }
-    if (start_simulation(&table) == 1)
-    {
-        destroy_all(&table);
-        return (EXIT_FAILURE);
-    }
-    join_and_finish(&table);
-    destroy_all(&table);
     return (EXIT_SUCCESS);
 }
 
+int     secure_init(pthread_mutex_t *mutex)
+{
+    if (pthread_mutex_init(mutex, NULL) != 0)
+    {
+        error_msg(INIT_ERR, NULL);
+        return (EXIT_FAILURE);
+    }
+    return (EXIT_SUCCESS);
+}

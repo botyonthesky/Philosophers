@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 11:28:10 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 16:13:23 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/02 08:54:30 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	init_argv(t_table *table, char **av)
 	else
 		table->nb_meal = -1;
 	if (table->nb_philo % 2 == 0)
-		table->time_to_think = table->time_to_eat - table->time_to_sleep;
+		table->time_to_think = table->time_to_eat - table->time_to_sleep - 10;
 	else
-		table->time_to_think = (table->time_to_eat * 2) - table->time_to_sleep;
+		table->time_to_think = (table->time_to_eat * 2) - table->time_to_sleep - 10;
 	table->someone_died = false;
 	table->thread_ready = false;
 	table->is_finish = false;
@@ -61,6 +61,31 @@ int	init_alloc(t_table *table)
 	return (EXIT_SUCCESS);
 }
 
+// int	init_philo(t_table *table)
+// {
+// 	int		i;
+// 	t_philo	*philo;
+
+// 	i = 0;
+// 	while (i < table->nb_philo)
+// 	{
+// 		philo = table->philo + i;
+// 		philo->philo_id = i + 1;
+// 		philo->count_meal = 0;
+// 		philo->is_full = false;
+// 		if (pthread_mutex_init(&philo->philo_mutex, NULL) != 0)
+// 		{
+// 			destroy_all(table);
+// 			error_msg(INIT_ERR, NULL);
+// 			return (EXIT_FAILURE);
+// 		}
+// 		philo->table = table;
+// 		manage_fork(philo, table->fork_mutex, i);
+// 		i++;
+// 	}
+// 	return (EXIT_SUCCESS);
+// }
+
 int	init_philo(t_table *table)
 {
 	int		i;
@@ -73,12 +98,8 @@ int	init_philo(t_table *table)
 		philo->philo_id = i + 1;
 		philo->count_meal = 0;
 		philo->is_full = false;
-		if (pthread_mutex_init(&philo->philo_mutex, NULL) != 0)
-		{
-			destroy_all(table);
-			error_msg(INIT_ERR, NULL);
+		if (secure_init(&philo->philo_mutex) == 1)
 			return (EXIT_FAILURE);
-		}
 		philo->table = table;
 		manage_fork(philo, table->fork_mutex, i);
 		i++;
