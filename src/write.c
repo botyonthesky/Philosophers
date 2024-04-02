@@ -6,20 +6,11 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 08:55:55 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/02 09:01:58 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/02 09:43:31 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
-
-void    lol(t_philo *philo, char *status, int i)
-{
-	pthread_mutex_lock(&philo->table->table_mutex);
-	pthread_mutex_lock(&philo->table->write_mutex);
-    printf("%ld %d %s\n", get_time() - philo->table->starting_time, i, status);
-	pthread_mutex_unlock(&philo->table->write_mutex);
-	pthread_mutex_unlock(&philo->table->table_mutex);
-}
 
 void	print_status(t_philo *philo, int status)
 {

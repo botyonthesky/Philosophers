@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 08:57:05 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/02 08:56:50 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/02 09:43:00 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,6 @@ void	think_routine(t_philo *philo)
 	wait_think(philo->table, philo);
 }
 
-// int	solo_routine(t_table *table)
-// {
-// 	long	time;
-
-// 	time = get_time() + (table->nb_philo * 2 * 10);
-// 	assign_data(&table->table_mutex, &table->starting_time, time);
-// 	synchro_philo(table->starting_time);
-// 	if (pthread_create(&table->philo[0].thread, NULL,
-// 			thread_solo_routine, &table->philo[0]) != 0)
-// 	{
-// 		destroy_all(table);
-// 		error_msg(CREATE_ERR, NULL);
-// 		return (EXIT_FAILURE);
-// 	}
-// 	pthread_join(table->philo[0].thread, NULL);
-// 	assign_bool(&table->table_mutex, &table->is_finish, true);
-// 	return (EXIT_SUCCESS);
-// }
-
 int	solo_routine(t_table *table)
 {
 	long	time;
@@ -69,7 +50,8 @@ int	solo_routine(t_table *table)
 	time = get_time() + (table->nb_philo * 2 * 10);
 	assign_data(&table->table_mutex, &table->starting_time, time);
 	synchro_philo(table->starting_time);
-	if (secure_create(&table->philo[0].thread, thread_solo_routine, &table->philo[0]) == 1)
+	if (secure_create(&table->philo[0].thread,
+			thread_solo_routine, &table->philo[0]) == 1)
 		return (EXIT_FAILURE);
 	pthread_join(table->philo[0].thread, NULL);
 	assign_bool(&table->table_mutex, &table->is_finish, true);
