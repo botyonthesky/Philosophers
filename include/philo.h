@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 07:34:49 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/02 10:30:32 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:08:38 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@
 # define INIT_ERR "ISSUE : Failed to init mutex"
 # define CREATE_ERR "ISSUE : Failed on create mutex"
 # define JOIN_ERR "ISSUE : Failed on join mutex"
-# define NB_ARGV "Argument must be only digit between 1 and INT_MAX\n \
-and/or the numbers of philosophers cant be more than 200"
+# define NB_ARGV "Argument must be only digit between 1 and INT_MAX\n"
 # define USAGE "Usage :\n \
 argv[1] : number_of_philosophers\n \
 argv[2] : time_to_die\n \
@@ -95,8 +94,8 @@ int					main(int argc, char **argv);
 
 /*----------------------------------Init------------------------------------*/
 
-int					ft_init(t_table *table, char **av);
 int					init_argv(t_table *table, char **av);
+int					ft_init(t_table *table);
 int					init_alloc(t_table *table);
 int					init_philo(t_table *table);
 void				manage_fork(t_philo *philo, t_fork *forks, int i);

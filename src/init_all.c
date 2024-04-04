@@ -6,16 +6,14 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 11:28:10 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/02 10:32:28 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:36:34 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	ft_init(t_table *table, char **av)
+int	ft_init(t_table *table)
 {
-	if (init_argv(table, av) == 1)
-		return (EXIT_FAILURE);
 	if (init_alloc(table) == 1)
 		return (EXIT_FAILURE);
 	if (init_mutex(table) == 1)

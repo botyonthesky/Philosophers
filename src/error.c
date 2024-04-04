@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 07:34:05 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/01 16:16:07 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:36:10 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	error_msg(char *str, char *str2)
 {
-	ft_putstr_fd("Philo : ", STDERR_FILENO);
+	ft_putstr_fd("Philo : ", STDOUT_FILENO);
 	if (str != NULL)
-		ft_putendl_fd(str, STDERR_FILENO);
+		ft_putendl_fd(str, STDOUT_FILENO);
 	if (str2 != NULL)
-		ft_putendl_fd(str2, STDERR_FILENO);
+		ft_putendl_fd(str2, STDOUT_FILENO);
 	return (EXIT_FAILURE);
 }
 

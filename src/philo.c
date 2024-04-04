@@ -6,7 +6,7 @@
 /*   By: tmaillar <tmaillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 07:34:30 by tmaillar          #+#    #+#             */
-/*   Updated: 2024/04/02 10:16:33 by tmaillar         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:44:11 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int	philo(char **av)
 {
 	t_table	table;
 
-	if (ft_init(&table, av) == 1)
+	if (init_argv(&table, av) == 1)
+		return (EXIT_FAILURE);
+	if (ft_init(&table) == 1)
 	{
 		destroy_all(&table);
 		return (EXIT_FAILURE);
